@@ -20,7 +20,7 @@ development:
 
 heroku:
   ALLOWED_HOSTS:
-    - .xgul.herokuapp.com
+    - .xxxxxxweather.herokuapp.com
     - 127.0.0.1
     - localhost
   DEBUG: false
