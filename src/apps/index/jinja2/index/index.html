@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Weather page {% endblock %}
+
+{% block header %}{% endblock %}
+{% block main %}
+<br><br>
+<br><br>
+
+    <article>
+        <br><br>
+          <p>Weather London</p>
+<br><br>
+<br><br>
+<br><br>
+        <big> <p align="center">
+           Weather London now: {{w[0]}}, {{w[1]}}, {{w[2]}} </p>
+            <br><br>
+            {% for p in object_list %}
+              <p>{{p.city}}, {{p.we}}, {{p.data.strftime("%d-%m-%Y %H")}}</p>
+            {% endfor %}
+      </big>
+    </article>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+{% endblock %}

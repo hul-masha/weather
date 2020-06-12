@@ -1,0 +1,37 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "==19.10b0"
+httpie = "*"
+codecov = "*"
+coverage = "*"
+isort = "*"
+django-silk = "*"
+freezegun = "*"
+ipython = "*"
+line-profiler = "*"
+pudb = "*"
+pillow = "*"
+
+
+[packages]
+celery = {extras = ["redis"],version = "*"}
+django = "*"
+whitenoise = "*"
+dj-database-url = "*"
+dynaconf = {extras = ["yaml"],version = "*"}
+psycopg2-binary = "*"
+jinja2 = "*"
+sentry-sdk = "*"
+delorean = "*"
+gunicorn = "*"
+uvicorn = "*"
+boto3 = "*"
+uuid = "*"
+django-storages = "*"
+djangorestframework = "*"
+drf-yasg = {extras = ["validation"],version = "*"}
+future = "*"

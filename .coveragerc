@@ -1,0 +1,21 @@
+[run]
+
+branch = True
+omit =
+    src/manage.py
+    src/project/settings.py
+    src/project/target.zip/tmpl_39dbdc60827427b9448de0fcab8993472b7dc035.py
+    src/project/target.zip/tmpl_47600d16628417ee3b83c0f1ec2a510c1027f26d.py
+    src/project/target.zip/tmpl_6b207317770eafa52bc3126dfec295793d4708f9.py
+    src/project/target.zip/tmpl_6f930740242c59c356e426750ec5fed196944924.py
+    src/project/target.zip/tmpl_73d0361bcf26cd94732220b516011438fa5bed7d.py
+    src/project/target.zip/tmpl_96d6f41c44a57b302cedaf408f7b96af239f42ac.py
+    src/project/target.zip/tmpl_f1893010c12987f5a24bb810d518471afadf5f99.py
+    src/project/target.zip/tmpl_fddd151b6369c0b932932650cbe0dbf7f0a62ce8.py
+
+source = .
+
+[report]
+
+fail_under = 90
+skip_covered = True

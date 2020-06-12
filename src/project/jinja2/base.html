@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" type="text/css">
+	<link rel="stylesheet" href="{{ static('css/font-awesome.min.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ static('css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ static('css/hero-slider-style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ static('css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ static('css/tooplate-style.css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ static('favicon.ico') }}" type="image/x-icon">
+</head>
+
+<body>
+
+        <div class="cd-hero">
+            <div class="cd-slider-nav">
+                <nav class="navbar navbar-fixed-top">
+                    <div class="tm-navbar-bg">
+{% set ns=request.resolver_match.namespace %}
+{#<a href="{{ url("index:index") }}" class="{% if ns == "index" %} navbar-brand text-uppercase {% endif %}" href="#">
+    <i class="{% if ns == File[0] %}fa fa-home tm-brand-icon{% endif %}"></i>g,tlk</a> #}
+    {#<a href="{{ url("index:index") }}" class="navbar-brand text-uppercase" href="#">
+    <i class="fa fa-home tm-brand-icon"></i>
+        {% if user.is_authenticated %}
+        {{user.profile.name}}
+        {% else %}
+        {{File[1]}}
+    {% endif %}</a>
+                        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#tmNavbar">
+                            <&#9776;>
+                        </button>
+                       <div class="collapse navbar-toggleable-md text-xs-center text-uppercase tm-navbar" id="tmNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item ">
+                                    <a href="{{ url(file4[0]) }}" class="nav-link" href=""#0  data-no="1">{{file4[1]}}<span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="{{ url(file5[0]) }}" class="nav-link" href=""#0  data-no="2">{{file5[1]}}<span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url(file2[0]) }}" class="nav-link" href="#0"  data-no="3">{{file2[1]}}</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="{{ url(file3[0]) }}" class="nav-link" href=""#0  data-no="4">{{file3[1]}}<span class="sr-only">(current)</span></a>
+                                </li>
+                                    {% if user.is_authenticated %}
+                                <li class="nav-item ">
+                                    <a href="{{ url('api:v1:r') }}" class="nav-link" href=""#0  data-no="4">API<span class="sr-only">(current)</span></a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>#}
+
+
+{% block header %}{% endblock %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        {% block main %}
+{% endblock %}
+
+</body>
+</html>
