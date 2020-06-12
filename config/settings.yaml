@@ -26,3 +26,4 @@ heroku:
   DEBUG: false
   PROFILING: 0
   PRE_COMPILE: false
+  SECRET_KEY: "1"
