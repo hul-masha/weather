@@ -16,7 +16,7 @@ from django.views.generic import ListView
 
 class IndexView(ListView):
 
-    import requests
+    '''import requests
     import datetime
     r=requests.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
     payload = json.loads(r.text)
@@ -24,13 +24,34 @@ class IndexView(ListView):
     weather= payload["main"]["temp"] #- 273.15
     we_с = weather - 273
     place=payload["name"]
-    now = datetime.datetime.now()
+    now = datetime.datetime.now()'''
     template_name = "index/index.html"
-    extra_context={"w": [place,we_с,str(now)]}
-    p=Weather(data=now, we=we_с, city=place)
-    if not p.same_data:
-        p.save()
+   # extra_context={"w": [place,we_с,str(now)]}
+    #p=Weather(data=now, we=we_с, city=place)
+    #if not p.same_data:
+     #   p.save()
     model=Weather
+
+    def get_context_data(self, **kwargs):
+        parent_ctx = super().get_context_data()
+        import requests
+        import datetime
+        r = requests.get(
+            'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
+        payload = json.loads(r.text)
+        #print(payload)
+        weather = payload["main"]["temp"]  # - 273.15
+        we_с = weather - 273
+        place = payload["name"]
+        now = datetime.datetime.now()
+        p = Weather(data=now, we=we_с, city=place)
+        print(p)
+        if p.same_data():
+            p.save()
+            print("save")
+        ctx = {"w": [place,we_с,str(now)]}
+        ctx.update(parent_ctx)
+        return ctx
 
 
 

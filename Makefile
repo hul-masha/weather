@@ -1,8 +1,8 @@
 BRANCH := $(shell git branch --quiet --no-color | grep '*' | sed -e 's/^\*\ //g')
 HERE := $(shell pwd)
 VENV := $(shell pipenv --venv)
-ash := asham
-data := tmssite
+ash := masha
+data := weather
 PYTHONPATH := ${HERE}/src
 TEST_PARAMS := --verbosity 2 --pythonpath "${PYTHONPATH}"
 PSQL_PARAMS := --host=localhost --username=asham --password

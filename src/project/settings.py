@@ -120,12 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
-"""PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-]"""
 
 LANGUAGE_CODE = "en-us"
 
@@ -138,17 +132,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = "/assets/"  #'/static/'  это не папка а ссылка
-# STATIC_URL = '/static/'  путь от которого отсчит путь к статич файлам
+STATIC_URL = "/assets/"
 
 STATICFILES_DIRS = [
     PROJECT_DIR / "static",
 ]
 
-STATIC_ROOT = REPO_DIR / ".static"  # место где хранится статика
+STATIC_ROOT = REPO_DIR / ".static"
 
-# if not DEBUG:
-#   STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 if not DEBUG:
 
