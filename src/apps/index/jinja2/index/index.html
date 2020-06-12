@@ -18,8 +18,9 @@
         <big> <p align="center">
            Weather London now: {{w[0]}}, {{w[1]}}, {{w[2]}} </p>
             <br><br>
+            <p>Other weather in London:</p>
             {% for p in object_list %}
-              <p>{{p.city}}, {{p.we}}, {{p.data.strftime("%d-%m-%Y %H")}}</p>
+              <p> {{p.we}}, {{p.data.strftime("%d-%m-%Y %H:%M")}}</p>
             {% endfor %}
       </big>
     </article>

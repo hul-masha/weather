@@ -27,7 +27,7 @@ class IndexView(ListView):
     now = datetime.datetime.now()
     template_name = "index/index.html"
     extra_context={"w": [place,we_с,str(now)]}
-    p=Weather(data=now, we=weather, city=place)
+    p=Weather(data=now, we=we_с, city=place)
     if not p.same_data:
         p.save()
     model=Weather
