@@ -6,7 +6,7 @@ class Weather(m.Model):
     we = m.IntegerField(null=True, blank=True)
     city = m.TextField(null=True, blank=True)
 
-    def same_data(self):
+    def same_data_city(self):
         for p in Weather.objects.all():
             # print(p.data.strftime("%d-%m-%Y %H"), self.data.strftime("%d-%m-%Y %H"))
             if p.data.strftime("%d-%m-%Y %H") == self.data.strftime("%d-%m-%Y %H"):

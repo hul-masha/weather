@@ -1,10 +1,6 @@
 import json
+import datetime
 
-from django import http as h
-from django.db import transaction
-from django.http import HttpRequest
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
@@ -16,7 +12,7 @@ from apps.index.forms import UpForm
 from apps.index.models import Weather
 
 api_city = "London"
-
+nw = datetime.datetime.now()
 
 class IndexView(ListView):
 
@@ -29,25 +25,28 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         parent_ctx = super().get_context_data()
-        import requests
-        import datetime
+        k=same_data(nw, api_city)
+        if k:
+            ctx = {"w": [api_city, k.we, str(k.data)]}
+        else:
+            import requests
 
-        r = requests.get(
+            r = requests.get(
             #'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
             f"http://api.openweathermap.org/data/2.5/weather?q={api_city}&APPID={settings.API_KEY}"
-        )
-        payload = json.loads(r.text)
+            )
+            payload = json.loads(r.text)
         # print(payload)
-        weather = payload["main"]["temp"]  # - 273.15
-        we_с = weather - 273
-        place = payload["name"]
-        now = datetime.datetime.now()
-        p = Weather(data=now, we=we_с, city=place)
-        print(p)
-        if p.same_data():
-            p.save()
-            print("save")
-        ctx = {"w": [place, we_с, str(now)]}
+            weather = payload["main"]["temp"]  # - 273.15
+            we_с = weather - 273
+            place = payload["name"]
+            now = datetime.datetime.now()
+            p = Weather(data=now, we=we_с, city=place)
+            print(p)
+            if p.same_data_city():
+                p.save()
+                print("save")
+            ctx = {"w": [place, we_с, str(now)]}
         ctx.update(parent_ctx)
         return ctx
 
@@ -60,16 +59,15 @@ class UpView(FormView):
     def form_valid(self, form):
         c = form.cleaned_data.get("city")
         print(c)
-        global api_city
+        global api_city, nw
         api_city = c
+        nw=form.cleaned_data.get("dat")
+        print(nw)
         return super().form_valid(form)
 
-    # @transaction.atomic()
-    # def form_valid(self, form):
-    #    user = form.save()
-    #   start_verification(self.request, user)
-    #  return super().form_valid(form)
-
-
-# def get(self,request):
-#    return render(request, "index/index.html")
+def same_data(now_dat, town):
+    for p in Weather.objects.all():
+        if p.data.strftime("%d-%m-%Y %H") == now_dat.strftime("%d-%m-%Y %H"):
+            if p.city == town:
+                return p
+    return False
