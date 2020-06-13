@@ -3,9 +3,11 @@ from django.views.generic import TemplateView
 
 from apps.index.apps import IndexConfig
 from apps.index.views import IndexView
+from apps.index.views import UpView
 
 app_name = IndexConfig.label
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index",),
+    path("f/", UpView.as_view(), name="f",),
 ]

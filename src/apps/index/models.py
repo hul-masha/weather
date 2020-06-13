@@ -8,9 +8,10 @@ class Weather(m.Model):
 
     def same_data(self):
         for p in Weather.objects.all():
-            print(p.data.strftime("%d-%m-%Y %H"), self.data.strftime("%d-%m-%Y %H"))
+            #print(p.data.strftime("%d-%m-%Y %H"), self.data.strftime("%d-%m-%Y %H"))
             if p.data.strftime("%d-%m-%Y %H")==self.data.strftime("%d-%m-%Y %H"):
-                return  False
+                if p.city==self.city:
+                    return  False
         return True
 
     class Meta:

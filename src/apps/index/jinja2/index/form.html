@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Weather page {% endblock %}
+
+{% block header %}{% endblock %}
+{% block main %}
+<br><br>
+<br><br>
+
+    <article>
+        <br><br>
+          <p>Choice city</p>
+<br><br>
+<br><br>
+<br><br>
+        <big>
+            <br><br>
+            <form action="{{ url('index:f') }}" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <div class="grid">
+                {{ form.as_p() }}
+            </div>
+            <button type="submit" class="button">Up</button>
+            <input name="next" type="hidden" value="{{ next }}">
+        </form>
+
+      </big>
+    </article>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+{% endblock %}

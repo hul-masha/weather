@@ -13,7 +13,7 @@ from django.views.generic import ListView
 #    if request.method=="GET":
 #       return render(request, "index/index.html") # питон приводит значение к типу прямо на месте тк динамич язык
 
-
+api_city='London'
 class IndexView(ListView):
 
     '''import requests
@@ -31,13 +31,13 @@ class IndexView(ListView):
     #if not p.same_data:
      #   p.save()
     model=Weather
-
     def get_context_data(self, **kwargs):
         parent_ctx = super().get_context_data()
         import requests
         import datetime
         r = requests.get(
-            'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
+            #'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
+            f'http://api.openweathermap.org/data/2.5/weather?q={api_city}&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
         payload = json.loads(r.text)
         #print(payload)
         weather = payload["main"]["temp"]  # - 273.15
@@ -53,6 +53,30 @@ class IndexView(ListView):
         ctx.update(parent_ctx)
         return ctx
 
+from django.db import transaction
+from django.urls import reverse_lazy
+from django.views.generic import FormView
+
+from apps.index.forms import UpForm
+
+
+
+class UpView(FormView):
+    template_name = "index/form.html"
+    form_class = UpForm
+    success_url = reverse_lazy("index:index")
+    def form_valid(self, form):
+        c = form.cleaned_data.get("city")
+        print(c)
+        global api_city
+        api_city = c
+        return super().form_valid(form)
+
+    #@transaction.atomic()
+    #def form_valid(self, form):
+    #    user = form.save()
+     #   start_verification(self.request, user)
+      #  return super().form_valid(form)
 
 
 
