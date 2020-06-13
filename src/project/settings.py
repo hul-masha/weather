@@ -40,7 +40,6 @@ INSTALLED_APPS_DICT = {
     12: "rest_framework.authtoken",
     13: "drf_yasg",
     22: "apps.index.apps.IndexConfig",
-
 }
 if PROFILING:
     INSTALLED_APPS_DICT[6] = "silk"
@@ -153,5 +152,3 @@ if not DEBUG:
     )
 
 SITE_ID = _settings.SITE_ID
-
-

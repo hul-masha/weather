@@ -8,6 +8,6 @@ from apps.index.views import UpView
 app_name = IndexConfig.label
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index",),
-    path("f/", UpView.as_view(), name="f",),
+    path("f/", IndexView.as_view(), name="index",),
+    path("", UpView.as_view(), name="f",),
 ]

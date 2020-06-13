@@ -16,14 +16,17 @@
 <br><br>
 <br><br>
         <big> <p align="center">
-           Weather {{w[0]}} now: {{w[0]}}, {{w[1]}}, {{w[2]}} </p>
+           Weather in {{w[0]}} now: {{w[1]}} C in {{w[2]}} </p>
             <br><br>
             <p>Other weather in {{w[0]}}:</p>
             {% for p in object_list %}
             {% if p.city==w[0] %}
-              <p> {{p.we}}, {{p.data.strftime("%d-%m-%Y %H:%M")}}</p>{% endif %}
+              <p> {{p.we}} C in {{p.data.strftime("%d-%m-%Y %H:%M")}}</p>{% endif %}
             {% endfor %}
       </big>
+        <br><br>
+        <a href="{{ url('index:f') }}">
+            <button class="button" type="submit">Choice other city</button></a>
     </article>
 <br><br>
 <br><br>
