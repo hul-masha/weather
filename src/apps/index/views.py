@@ -1,6 +1,7 @@
 import datetime
 import json
 
+from delorean import Delorean
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView
@@ -27,13 +28,13 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         parent_ctx = super().get_context_data()
         k = same_data(nw, api_city)
+        print(k)
         if k:
-            ctx = {"w": [api_city, k.we, str(k.data)]}
+            ctx = {"w": [api_city, k.we, str(k.data.strftime("%d-%m-%Y %H:%M:%S")), ""]}
         else:
             import requests
 
             r = requests.get(
-                #'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b13bc69dfb1da2ace7b8a62928fef4f0')
                 f"http://api.openweathermap.org/data/2.5/weather?q={api_city}&APPID={settings.API_KEY}"
             )
             payload = json.loads(r.text)
@@ -47,7 +48,7 @@ class IndexView(ListView):
             if p.same_data_city():
                 p.save()
                 print("save")
-            ctx = {"w": [place, we_с, str(now)]}
+            ctx = {"w": [place, we_с, str(now.strftime("%d-%m-%Y %H:%M:%S")), "now"]}
         ctx.update(parent_ctx)
         return ctx
 
@@ -62,17 +63,14 @@ class UpView(FormView):
         print(c)
         global api_city, nw
         api_city = c
-        nw = form.cleaned_data.get("dat")
+        nw = form.cleaned_data.get("date")
         print(nw)
         return super().form_valid(form)
 
 
 def same_data(now_dat, town):
-    try:
-        for p in Weather.objects.all():
-            if p.data.strftime("%d-%m-%Y %H") == now_dat.strftime("%d-%m-%Y %H"):
-                if p.city == town:
-                    return p
-        return False
-    except Exception:
-        return False
+    for p in Weather.objects.all():
+        if p.data.strftime("%d-%m-%Y %H") == now_dat.strftime("%d-%m-%Y %H"):
+            if p.city == town:
+                return p
+    return False
